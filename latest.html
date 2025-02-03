@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coimbatore Travels</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #ff6f61, #ffcc00); /* Gradient header */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin: 5px 0 0;
+        }
+        section {
+            padding: 20px;
+        }
+        .vehicle-info, .contact-info, .tab-container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .vehicle-image {
+            max-width: 100%; /* Ensure image is responsive */
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .tab-buttons {
+            display: flex;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            background-color: #4caf50; /* Green button */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin: 5px; /* Add margin for spacing on smaller screens */
+        }
+        .tab-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        .tab-button.active {
+            background-color: #ff6f61; /* Coral color for active tab */
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        form label {
+            font-weight: bold;
+            color: #555;
+        }
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        form button {
+            background-color: #ff6f61; /* Coral button */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Full width on smaller screens */
+        }
+        form button:hover {
+            background-color: #ff4a3d; /* Darker coral on hover */
+        }
+        footer {
+            background: linear-gradient(135deg, #ff6f61, #ffcc00); /* Gradient footer */
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+        footer p {
+            margin: 0;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        ul li, ol li {
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ff6f61; /* Coral color for headings */
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .animated {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem; /* Smaller font size for tablets */
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .tab-buttons {
+                flex-direction: column; /* Stack buttons vertically on smaller screens */
+            }
+            .tab-button {
+                width: 100%; /* Full width buttons on smaller screens */
+                margin: 5px 0; /* Adjust margin for stacked buttons */
+            }
+            .vehicle-image {
+                max-width: 100%; /* Ensure image fits within the screen */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem; /* Smaller font size for mobile */
+            }
+            header p {
+                font-size: 0.9rem;
+            }
+            .tab-content {
+                padding: 10px; /* Reduce padding for smaller screens */
+            }
+            form input, form button {
+                font-size: 0.9rem; /* Smaller font size for form elements */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Coimbatore Travels</h1>
+    <p>Rent All Types of Cars for Your Needs</p>
+</header>
+
+<section>
+    <div class="vehicle-info animated">
+        <h2>Pricing</h2>
+        <p>🚗 Starting at just <strong>14 Rs per km</strong> – because every journey deserves to be affordable and smooth!</p>
+        <ul>
+            <li>Transparent Pricing: No hidden charges, no surprises.</li>
+            <li>Flexible Plans: Tailored to fit your needs, whether it's a quick ride or a long trip.</li>
+            <li>Real-Time Updates: Watch your fare calculate live as you ride!</li>
+        </ul>
+    </div>
+
+    <div class="vehicle-info animated">
+        <h2>Available Vehicles</h2>
+        <img class="vehicle-image" src="https://assets.onecompiler.app/42zmhr8xt/436ytbkne/sedan.jpg" alt="Sedan Car">
+        <p>Looking for a comfortable and reliable car for your travels in Coimbatore? We offer a wide range of rental vehicles to suit your needs, including sedans, SUVs, hatchbacks, and more. Whether it's for airport transfers, city tours, outstation trips, or business travel, our well-maintained vehicles are the perfect choice.</p>
+        <ul>
+            <li>Spacious and comfortable interiors (varies by car type)</li>
+            <li>Air conditioning for a pleasant journey</li>
+            <li>Experienced and courteous drivers</li>
+            <li>Well-maintained vehicles for your safety</li>
+            <li>24/7 Availability</li>
+        </ul>
+    </div>
+
+    <div class="contact-info animated">
+        <p>If you're interested in renting a car or need more details, feel free to contact us:</p>
+        <p><strong>Contact Number:</strong> <a href="tel:+919894188103" style="color: #ff6f61;">+91 9894188103</a></p>
+        <p><strong>Email:</strong> <a href="mailto:kumarvip405@gmail.com" style="color: #ff6f61;">kumarvip405@gmail.com</a></p>
+    </div>
+
+    <div class="tab-container animated">
+        <div class="tab-buttons">
+            <button class="tab-button active pulse-animation" onclick="openTab(event, 'booking')">Book Your Cabs</button>
+            <button class="tab-button" onclick="openTab(event, 'must-visit')">Must Visit Places</button>
+        </div>
+
+        <div id="booking" class="tab-content active">
+            <h2>Book Your Cabs</h2>
+            <form id="cabBookingForm">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required><br><br>
+                <label for="mobile">Mobile Number:</label><br>
+                <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required pattern="[0-9]{10}" value="+91"><br><br>
+                <label for="pickup">Pickup Location:</label><br>
+                <input type="text" id="pickup" name="pickup" placeholder="Enter your pickup location" required value="Coimbatore"><br><br>
+                <label for="drop">Drop Location:</label><br>
+                <input type="text" id="drop" name="drop" placeholder="Enter your drop location" required value="Ooty"><br><br>
+                <label for="date">Date:</label><br>
+                <input type="date" id="date" name="date" required value="2023-12-01"><br><br>
+                <label for="time">Time (24-hour format):</label><br>
+                <input type="time" id="time" name="time" required value="09:00"><br><br>
+                <button type="button" onclick="submitToWhatsApp()">Submit</button>
+            </form>
+        </div>
+
+        <div id="must-visit" class="tab-content">
+            <h2>Nearby Tourist Places</h2>
+            <p>Coimbatore, known as the "Manchester of South India," is surrounded by stunning landscapes and cultural landmarks. Here are some must-visit destinations:</p>
+            <ol>
+                <li><strong>Marudhamalai Hill Temple (15 km):</strong> A serene temple dedicated to Lord Murugan. Located on a hill, it offers panoramic views and a peaceful ambiance.</li>
+                <li><strong>Ooty (Udhagamandalam) (85 km):</strong> A picturesque hill station just a few hours from Coimbatore. Famous for its tea gardens, botanical gardens, and pleasant climate.</li>
+                <li><strong>Siruvani Waterfalls and Dam (37 km):</strong> Known for its sweet water and lush surroundings. Ideal for nature lovers and picnics.</li>
+                <li><strong>Black Thunder Water Park (40 km):</strong> A fun-filled destination for families and adventure enthusiasts. Features thrilling water rides and recreational activities.</li>
+                <li><strong>Valparai (110 km):</strong> A tranquil hill station surrounded by tea and coffee plantations. Perfect for a peaceful getaway.</li>
+                <li><strong>Perur Pateeswarar Temple (12 km):</strong> An ancient temple with stunning architecture. A must-visit for history and culture enthusiasts.</li>
+                <li><strong>Anamalai Tiger Reserve (Topslip) (90 km):</strong> A wildlife sanctuary located near Pollachi. Offers jungle safaris to witness elephants, tigers, and diverse flora and fauna.</li>
+                <li><strong>Kovai Kondattam Amusement Park (10 km):</strong> A great destination for family fun. Features water rides, games, and recreational areas for kids and adults alike.</li>
+            </ol>
+            <p>Plan your trip to these amazing spots with our reliable car rental service and make the most of your visit to Coimbatore.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>&copy; 2025 Coimbatore Travels. All rights reserved.</p>
+</footer>
+
+<script>
+    function openTab(evt, tabName) {
+        let i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab-button");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("active");
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('booking').style.display = "block";
+    });
+
+    function submitToWhatsApp() {
+        const name = document.getElementById('name').value;
+        const mobile = document.getElementById('mobile').value;
+        const pickup = document.getElementById('pickup').value;
+        const drop = document.getElementById('drop').value;
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+
+        const whatsappMessage = `Name: ${name}%0AMobile: ${mobile}%0APickup: ${pickup}%0ADrop: ${drop}%0ADate: ${date}%0ATime: ${time}`;
+        const whatsappURL = `https://wa.me/919894188103?text=${whatsappMessage}`;
+
+        window.open(whatsappURL, '_blank');
+    }
+
+    // Add animations to elements
+    document.addEventListener('DOMContentLoaded', function() {
+        const animatedElements = document.querySelectorAll('.animated');
+        animatedElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.style.opacity = 1;
+            }, index * 300); // Staggered animation delay
+        });
+    });
+</script>
+
+</body>
+</html>
