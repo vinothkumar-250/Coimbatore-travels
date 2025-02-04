@@ -13,7 +13,8 @@
             color: #333;
         }
         header {
-            background: linear-gradient(135deg, #ff6f61, #ffcc00); /* Gradient header */
+            background: -webkit-linear-gradient(135deg, #ff6f61, #ffcc00); /* Gradient header */
+            background: linear-gradient(135deg, #ff6f61, #ffcc00);
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -88,6 +89,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1rem;
+            -webkit-appearance: none; /* Remove default iOS styling */
         }
         form button {
             background-color: #ff6f61; /* Coral button */
@@ -99,12 +101,14 @@
             font-size: 1rem;
             transition: background-color 0.3s ease;
             width: 100%; /* Full width on smaller screens */
+            -webkit-appearance: none; /* Remove default iOS styling */
         }
         form button:hover {
             background-color: #ff4a3d; /* Darker coral on hover */
         }
         footer {
-            background: linear-gradient(135deg, #ff6f61, #ffcc00); /* Gradient footer */
+            background: -webkit-linear-gradient(135deg, #ff6f61, #ffcc00); /* Gradient footer */
+            background: linear-gradient(135deg, #ff6f61, #ffcc00);
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -132,18 +136,32 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        @-webkit-keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @-webkit-keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
 
         .animated {
-            animation: fadeIn 1s ease-out;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            -webkit-animation: fadeIn 1s ease-out forwards;
         }
 
         .pulse-animation {
-            animation: pulse 2s infinite;
+            animation: bounce 2s infinite;
+            -webkit-animation: bounce 2s infinite;
         }
 
         /* Media Queries for Responsive Design */
@@ -296,7 +314,7 @@
         const whatsappMessage = `Name: ${name}%0AMobile: ${mobile}%0APickup: ${pickup}%0ADrop: ${drop}%0ADate: ${date}%0ATime: ${time}`;
         const whatsappURL = `https://wa.me/919894188103?text=${whatsappMessage}`;
 
-        window.open(whatsappURL, '_blank');
+        window.location.href = whatsappURL; // Use window.location.href for iOS compatibility
     }
 
     // Add animations to elements
