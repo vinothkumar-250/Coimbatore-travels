@@ -19,14 +19,17 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: gradientShift 5s infinite alternate;
         }
         header h1 {
             margin: 0;
             font-size: 2.5rem;
+            animation: bounce 2s infinite;
         }
         header p {
             font-size: 1.2rem;
             margin: 5px 0 0;
+            animation: fadeIn 2s ease-in-out;
         }
         section {
             padding: 20px;
@@ -37,6 +40,7 @@
             margin: 20px 0;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-out;
         }
         .vehicle-image {
             max-width: 100%; /* Ensure image is responsive */
@@ -45,6 +49,7 @@
             margin: 10px auto;
             border-radius: 8px;
             object-fit: cover;
+            animation: zoomIn 1s ease-out;
         }
         .tab-buttons {
             display: flex;
@@ -62,6 +67,7 @@
             font-size: 1rem;
             transition: background-color 0.3s ease;
             margin: 5px; /* Add margin for spacing on smaller screens */
+            animation: pulse 2s infinite;
         }
         .tab-button:hover {
             background-color: #45a049; /* Darker green on hover */
@@ -74,6 +80,7 @@
             padding: 20px;
             background-color: #f9f9f9;
             border-radius: 8px;
+            animation: fadeIn 1s ease-out;
         }
         .tab-content.active {
             display: block;
@@ -102,6 +109,7 @@
             transition: background-color 0.3s ease;
             width: 100%; /* Full width on smaller screens */
             -webkit-appearance: none; /* Remove default iOS styling */
+            animation: pulse 2s infinite;
         }
         form button:hover {
             background-color: #ff4a3d; /* Darker coral on hover */
@@ -116,6 +124,7 @@
             bottom: 0;
             width: 100%;
             box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            animation: gradientShift 5s infinite alternate;
         }
         footer p {
             margin: 0;
@@ -128,6 +137,7 @@
         }
         h2 {
             color: #ff6f61; /* Coral color for headings */
+            animation: colorShift 3s infinite alternate;
         }
 
         /* Animations */
@@ -151,6 +161,62 @@
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-10px); }
             60% { transform: translateY(-5px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @-webkit-keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @-webkit-keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @-webkit-keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @-webkit-keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes colorShift {
+            0% { color: #ff6f61; }
+            50% { color: #ffcc00; }
+            100% { color: #ff6f61; }
+        }
+
+        @-webkit-keyframes colorShift {
+            0% { color: #ff6f61; }
+            50% { color: #ffcc00; }
+            100% { color: #ff6f61; }
         }
 
         .animated {
@@ -281,6 +347,43 @@
 </section>
 
 <footer class="footer">
- <p>&copy; 2025 Coimbatore Travels. All rights reserved.</p>
+    <p>&copy; 2025 Coimbatore Travels. All rights reserved.</p>
+</footer>
 
-    
+<script>
+    function openTab(evt, tabName) {
+        var i, tabContent, tabButtons;
+        tabContent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabContent.length; i++) {
+            tabContent[i].style.display = "none";
+        }
+        tabButtons = document.getElementsByClassName("tab-button");
+        for (i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    function submitToWhatsApp() {
+        var name = document.getElementById("name").value;
+        var mobile = document.getElementById("mobile").value;
+        var pickup = document.getElementById("pickup").value;
+        var drop = document.getElementById("drop").value;
+        var date = document.getElementById("date").value;
+        var time = document.getElementById("time").value;
+
+        var url = "https://wa.me/919894188103?text=" +
+            "Name: " + encodeURIComponent(name) + "%0a" +
+            "Mobile: " + encodeURIComponent(mobile) + "%0a" +
+            "Pickup: " + encodeURIComponent(pickup) + "%0a" +
+            "Drop: " + encodeURIComponent(drop) + "%0a" +
+            "Date: " + encodeURIComponent(date) + "%0a" +
+            "Time: " + encodeURIComponent(time);
+
+        window.open(url, "_blank");
+    }
+</script>
+
+</body>
+</html>
