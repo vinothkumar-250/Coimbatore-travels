@@ -26,19 +26,27 @@ pipeline {
             steps {
                 withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
                     script {
-                        def zipFile = "app-${env.BUILD_NUMBER}.zip"
-                        sh "zip -r ${zipFile} *"
-                        sh "aws s3 cp ${zipFile} s3://${env.S3_BUCKET}/${zipFile}"
+                        def buildNumber = env.BUILD_NUMBER ?: new Date().format('yyyyMMddHHmmss')
+                        def zipFile = "app-${buildNumber}.zip"
+                        def versionLabel = "v${buildNumber}"
+                        
+                        sh "zip -r ${zipFile} . -x '*.git*'"
+                        sh "ls -lh ${zipFile}" // Debugging
+
+                        sh "aws s3 cp ${zipFile} s3://${S3_BUCKET}/${zipFile} --debug"
+
                         sh """
                             aws elasticbeanstalk create-application-version \
-                            --application-name ${env.EB_APP_NAME} \
-                            --version-label v${env.BUILD_NUMBER} \
-                            --source-bundle S3Bucket=${env.S3_BUCKET},S3Key=${zipFile}
+                            --application-name ${EB_APP_NAME} \
+                            --version-label ${versionLabel} \
+                            --source-bundle S3Bucket=${S3_BUCKET},S3Key=${zipFile} \
+                            --debug
                         """
+
                         sh """
                             aws elasticbeanstalk update-environment \
-                            --environment-name ${env.EB_ENV_NAME} \
-                            --version-label v${env.BUILD_NUMBER}
+                            --environment-name ${EB_ENV_NAME} \
+                            --version-label ${versionLabel}
                         """
                     }
                 }
